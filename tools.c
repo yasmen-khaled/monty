@@ -26,7 +26,7 @@ void addnode(stack_t **stack, int n)
 * freemem - frees a doubly linked list
 * @stack: head of the stack
 */
-void freemem(stack_t *stack)
+void freememo(stack_t *stack)
 {
 	stack_t *aux;
 
