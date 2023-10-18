@@ -1,3 +1,6 @@
+#include "monty.h"
+
+
 int execute(char *content, stack_t **stack, unsigned int line_no, FILE *file)
 {
     instruction_t opst[] = {
