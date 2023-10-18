@@ -41,34 +41,37 @@ void queue(stack_t **stack, unsigned int line_no)
 	bus.lifi = 1;
 }
 
+
+
 void addqueue(stack_t **stack, int n)
 {
-	stack_t *new_node, *aux;
+    stack_t *new_node = malloc(sizeof(stack_t));
+    if (new_node == NULL)
+    {
+        fprintf(stderr, "Error: Failed to allocate memory for new node\n");
+        exit(EXIT_FAILURE);
+    }
 
-	aux = *stack;
-	new_node = malloc(sizeof(stack_t));
-	if (new_node == NULL)
-	{
-		printf("Error\n");
-	}
-	new_node->n = n;
-	new_node->next = NULL;
-	if (aux)
-	{
-		while (aux->next)
-			aux = aux->next;
-	}
-	if (!aux)
-	{
-		*stack = new_node;
-		new_node->prev = NULL;
-	}
-	else
-	{
-		aux->next = new_node;
-		new_node->prev = aux;
-	}
+    new_node->n = n;
+    new_node->prev = NULL;
+    new_node->next = NULL;
+
+    if (*stack == NULL)
+    {
+        *stack = new_node;
+    }
+    else
+    {
+        stack_t *last_node = *stack;
+        while (last_node->next != NULL)
+        {
+            last_node = last_node->next;
+        }
+        last_node->next = new_node;
+        new_node->prev = last_node;
+    }
 }
+
 
 void starck(stack_t **stack, unsigned int line_no)
 {
