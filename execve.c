@@ -8,7 +8,7 @@ int execute(char *content, stack_t **stack, unsigned int line_no, FILE *file)
         {"nop", nop}, {NULL, NULL}
     };
 
-    char *op = strtok(content, " \n\t");
+   char *op = strtok(content, " \n\t");
     if (op && op[0] == '#')
         return 0;
 
