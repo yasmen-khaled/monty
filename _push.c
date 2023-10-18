@@ -1,5 +1,7 @@
 #include "monty.h"
 
+int is_valid_integer(const char *str);
+
 void push(stack_t **stack, unsigned int line_no)
 {
     if (bus.arg == NULL || !is_valid_integer(bus.arg))
