@@ -60,10 +60,10 @@ void pop(stack_t **stack, unsigned int line_no);
 void swap(stack_t **stack, unsigned int line_no);
 void add(stack_t **stack, unsigned int line_no);
 void nop(stack_t **stack, unsigned int line_no);
-void addnode(stack_t **stack, int n);
+void _addnode(stack_t **stack, int n);
 void memo(stack_t *stack);
-void queue(stack_t **stack, unsigned int line_no);
-void addqueue(stack_t **stack, int n);
+void _queue(stack_t **stack, unsigned int line_no);
+void _addqueue(stack_t **stack, int n);
 void _starck(stack_t **stack, unsigned int line_no);
 
 
