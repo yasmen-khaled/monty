@@ -25,6 +25,6 @@ int execute(char *content, stack_t **stack, unsigned int line_no, FILE *file)
     fprintf(stderr, "L%d: unknown instruction %s\n", line_no, op);
     fclose(file);
     free(content);
-    memo(*stack);
+    freememo(*stack);
     exit(EXIT_FAILURE);
 }
