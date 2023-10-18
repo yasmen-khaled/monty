@@ -97,3 +97,4 @@ void starck(stack_t **stack, unsigned int line_no)
 	(void)line_no;
 	bus.lifi = 0;
 }
+
