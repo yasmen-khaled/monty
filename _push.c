@@ -1,33 +1,34 @@
 #include "monty.h"
 
-
 void push(stack_t **stack, unsigned int line_no)
 {
-	int n, j = 0, flag = 0;
+    if (bus.arg == NULL || !is_valid_integer(bus.arg))
+    {
+        fprintf(stderr, "L%d: usage: push integer\n", line_no);
+        exit(EXIT_FAILURE);
+    }
 
-	if (bus.arg)
-	{
-		if (bus.arg[0] == '-')
-			j++;
-		for (; bus.arg[j] != '\0'; j++)
-		{
-			if (bus.arg[j] > 57 || bus.arg[j] < 48)
-				flag = 1; }
-		if (flag == 1)
-		{ fprintf(stderr, "L%d: usage: push integer\n", line_no);
-			fclose(bus.file);
-			free(bus.content);
-			freemem(*stack);
-			exit(EXIT_FAILURE); }}
-	else
-	{ fprintf(stderr, "L%d: usage: push integer\n", line_no);
-		fclose(bus.file);
-		free(bus.content);
-		freemem(*stack);
-		exit(EXIT_FAILURE); }
-	n = atoi(bus.arg);
-	if (bus.lifi == 0)
-		addnode(stack, n);
-	else
-		addqueue(stack, n);
+    int n = atoi(bus.arg);
+    if (bus.lifi == 0)
+        addnode(stack, n);
+    else
+        addqueue(stack, n);
+}
+
+int is_valid_integer(const char *str)
+{
+    if (str == NULL || *str == '\0')
+        return 0;
+
+    int i = 0;
+    if (str[i] == '-')
+        i++;
+
+    for (; str[i] != '\0'; i++)
+    {
+        if (str[i] < '0' || str[i] > '9')
+            return 0;
+    }
+
+    return 1;
 }
