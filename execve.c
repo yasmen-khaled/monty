@@ -8,8 +8,9 @@
     char *arg = strtok(NULL, " \n\t");
     if (strcmp(op, "push") == 0) {
         if (arg) {
+    
             int value = atoi(arg);
-            push(stack, value, line_no);
+            push(stack, line_no);
         } else {
             fprintf(stderr, "L%d: missing argument for push\n", line_no);
             fclose(file);
@@ -30,4 +31,3 @@
     }
     return 0;
 }
-
