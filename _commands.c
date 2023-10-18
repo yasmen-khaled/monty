@@ -73,7 +73,7 @@ void addqueue(stack_t **stack, int n)
 }
 
 
-void starck(stack_t **stack, unsigned int line_no)
+void _starck(stack_t **stack, unsigned int line_no)
 {
 	(void)stack;
 	(void)line_no;
