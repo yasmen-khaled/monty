@@ -6,22 +6,23 @@ int execute(char *content, stack_t **stack, unsigned int line_no, FILE *file)
         return 0;
 
     char *arg = strtok(NULL, " \n\t");
-    if (strcmp(op, "push") == 0)
+   if (strcmp(op, "push") == 0)
+{
+    if (arg)
     {
-        if (arg)
-        {
-            int value = atoi(arg);
-            push(stack, value, line_no);
-        }
-        else
-        {
-            fprintf(stderr, "L%d: missing argument for push\n", line_no);
-            fclose(file);
-            free(content);
-            freemem(*stack);
-            exit(EXIT_FAILURE);
-        }
+        int value = atoi(arg);
+        push(&stack, value);
     }
+    else
+    {
+        fprintf(stderr, "L%d: missing argument for push\n", line_no);
+        fclose(file);
+        free(content);
+        freemem(stack);
+        exit(EXIT_FAILURE);
+    }
+}
+
     else if (strcmp(op, "pall") == 0)
     {
         pall(stack, line_no);
