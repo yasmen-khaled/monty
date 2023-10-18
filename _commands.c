@@ -1,6 +1,6 @@
 #include "monty.h"
 
-void addnode(stack_t **stack, int n)
+void _addnode(stack_t **stack, int n)
 {
     stack_t *new_node = malloc(sizeof(stack_t));
     if (new_node == NULL)
@@ -34,7 +34,7 @@ void memo(stack_t *stack)
 
 
 
-void queue(stack_t **stack, unsigned int line_no)
+void _queue(stack_t **stack, unsigned int line_no)
 {
 	(void)stack;
 	(void)line_no;
@@ -43,7 +43,7 @@ void queue(stack_t **stack, unsigned int line_no)
 
 
 
-void addqueue(stack_t **stack, int n)
+void _addqueue(stack_t **stack, int n)
 {
     stack_t *new_node = malloc(sizeof(stack_t));
     if (new_node == NULL)
