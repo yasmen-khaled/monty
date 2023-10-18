@@ -72,5 +72,5 @@ void rotr(stack_t **stack, __attribute__((unused)) unsigned int line_no);
 void sub(stack_t **stack, unsigned int line_no);
 void mod(stack_t **stack, unsigned int line_no);
 void divs(stack_t **stack, unsigned int line_no);
-
+char *_strtok(char *string, char *d);
 #endif
