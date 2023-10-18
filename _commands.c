@@ -2,20 +2,23 @@
 
 void addnode(stack_t **stack, int n)
 {
+    stack_t *new_node = malloc(sizeof(stack_t));
+    if (new_node == NULL)
+    {
+        fprintf(stderr, "Error: Failed to allocate memory for new node\n");
+        exit(EXIT_FAILURE);
+    }
 
-	stack_t *new_node, *aux;
+    new_node->n = n;
+    new_node->prev = NULL;
+    new_node->next = *stack;
 
-	aux = *stack;
-	new_node = malloc(sizeof(stack_t));
-	if (new_node == NULL)
-	{ printf("Error\n");
-		exit(0); }
-	if (aux)
-		aux->prev = new_node;
-	new_node->n = n;
-	new_node->next = *stack;
-	new_node->prev = NULL;
-	*stack = new_node;
+    if (*stack != NULL)
+    {
+        (*stack)->prev = new_node;
+    }
+
+    *stack = new_node;
 }
 
 
