@@ -24,16 +24,14 @@ void addnode(stack_t **stack, int n)
 
 void freememo(stack_t *stack)
 {
-	stack_t *aux;
-
-	aux = stack;
-	while (stack)
-	{
-		aux = stack->next;
-		free(stack);
-		stack = aux;
-	}
+    while (stack != NULL)
+    {
+        stack_t *temp = stack;
+        stack = stack->next;
+        free(temp);
+    }
 }
+
 
 
 void queue(stack_t **stack, unsigned int line_no)
