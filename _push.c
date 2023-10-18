@@ -12,9 +12,9 @@ void push(stack_t **stack, unsigned int line_no)
 
     int n = atoi(bus.arg);
     if (bus.lifi == 0)
-        addnode(stack, n);
+        _addnode(stack, n);
     else
-        addqueue(stack, n);
+        _addqueue(stack, n);
 }
 
 int is_valid_integer(const char *str)
