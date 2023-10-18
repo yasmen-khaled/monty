@@ -1,34 +1,23 @@
 #include "monty.h"
 
-int execute(char *content, stack_t **stack, unsigned int line_no, FILE *file)
-{
-	instruction_t opst[] = {
-				{"push", push}, {"pall", pall}, {"pint", pint},
-				
-				{NULL, NULL}
-				};
-	unsigned int i = 0;
-	char *op;
+   int execute(char *content, stack_t **stack, unsigned int line_no, FILE *file) {
+       char *op = strtok(content, " \n\t");
+       if (op && op[0] == '#')
+           return 0;
 
-	op = strtok(content, " \n\t");
-	if (op && op[0] == '#')
-		return (0);
-	bus.arg = strtok(NULL, " \n\t");
-	while (opst[i].opcode && op)
-	{
-		if (strcmp(op, opst[i].opcode) == 0)
-		{	opst[i].f(stack, line_no);
-			return (0);
-		}
-		i++;
-	}
-	if (op && opst[i].opcode == NULL)
-	{
-		fprintf(stderr, "L%d: unknown instruction %s\n", line_no, op);
-		fclose(file);
-		free(content);
-		freemem(*stack);
-		exit(EXIT_FAILURE);
-	}
-	return (1);
-}
+       char *arg = strtok(NULL, " \n\t");
+       if (strcmp(op, "push") == 0) {
+           push(stack, line_no);
+       } else if (strcmp(op, "pall") == 0) {
+           pall(stack, line_no);
+       } else if (strcmp(op, "pint") == 0) {
+           pint(stack, line_no);
+       } else {
+           fprintf(stderr, "L%d: unknown instruction %s\n", line_no, op);
+           fclose(file);
+           free(content);
+           freemem(*stack);
+           exit(EXIT_FAILURE);
+       }
+       return 0;
+   }
