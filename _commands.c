@@ -22,7 +22,7 @@ void addnode(stack_t **stack, int n)
 }
 
 
-void freememo(stack_t *stack)
+void memo(stack_t *stack)
 {
     while (stack != NULL)
     {
