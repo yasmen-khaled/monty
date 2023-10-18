@@ -1,108 +1,136 @@
 #include "monty.h"
 /**
- * pchar - prints the char at the top of the stack,
- * followed by a new line
+ * push - add node to the stack
  * @stack: stack head
  * @line_no: line_number
  * Return: no return
-*/
-void pchar(stack_t **stack, unsigned int line_no)
+ */
+void push(stack_t **stack, unsigned int line_no)
 {
-	stack_t *h;
+	int n, j = 0, flag = 0;
 
-	h = *stack;
-	if (!h)
+	if (bus.arg)
 	{
-		fprintf(stderr, "L%d: can't pchar, stack empty\n", line_no);
+		if (bus.arg[0] == '-')
+			j++;
+		for (; bus.arg[j] != '\0'; j++)
+		{
+			if (bus.arg[j] > 57 || bus.arg[j] < 48)
+				flag = 1; }
+		if (flag == 1)
+		{ fprintf(stderr, "L%d: usage: push integer\n", line_no);
+			fclose(bus.file);
+			free(bus.content);
+			freemem(*stack);
+			exit(EXIT_FAILURE); }}
+	else
+	{ fprintf(stderr, "L%d: usage: push integer\n", line_no);
 		fclose(bus.file);
 		free(bus.content);
 		freemem(*stack);
-		exit(EXIT_FAILURE);
-	}
-	if (h->n > 127 || h->n < 0)
-	{
-		fprintf(stderr, "L%d: can't pchar, value out of range\n", line_no);
-		fclose(bus.file);
-		free(bus.content);
-		freemem(*stack);
-		exit(EXIT_FAILURE);
-	}
-	printf("%c\n", h->n);
+		exit(EXIT_FAILURE); }
+	n = atoi(bus.arg);
+	if (bus.lifi == 0)
+		addnode(stack, n);
+	else
+		addqueue(stack, n);
 }
-
 /**
- * pstr - prints the string starting at the top of the stack,
- * followed by a new
+ * pall - prints the stack
  * @stack: stack head
- * @line_no: line_number
+ * @line_no: no used
  * Return: no return
-*/
-void pstr(stack_t **stack, unsigned int line_no)
+ */
+void pall(stack_t **stack, unsigned int line_no)
 {
 	stack_t *h;
 	(void)line_no;
 
 	h = *stack;
+	if (h == NULL)
+		return;
 	while (h)
 	{
-		if (h->n > 127 || h->n <= 0)
-		{
-			break;
-		}
-		printf("%c", h->n);
+		printf("%d\n", h->n);
 		h = h->next;
 	}
-	printf("\n");
+}
+/**
+ * pint - prints the top
+ * @stack: stack head
+ * @line_no: line_number
+ * Return: no return
+ */
+void pint(stack_t **stack, unsigned int line_no)
+{
+	if (*stack == NULL)
+	{
+		fprintf(stderr, "L%u: can't pint, stack empty\n", line_no);
+		fclose(bus.file);
+		free(bus.content);
+		freemem(*stack);
+		exit(EXIT_FAILURE);
+	}
+	printf("%d\n", (*stack)->n);
+
 }
 
 /**
-  *rotl- rotates the stack to the top
-  *@stack: stack head
-  *@line_no: line_number
-  *Return: no return
+ * pop - prints the top
+ * @stack: stack head
+ * @line_no: line_number
+ * Return: no return
  */
-void rotl(stack_t **stack,  __attribute__((unused)) unsigned int line_no)
+void pop(stack_t **stack, unsigned int line_no)
 {
-	stack_t *tmp = *stack, *aux;
+	stack_t *h;
 
-	if (*stack == NULL || (*stack)->next == NULL)
+	if (*stack == NULL)
 	{
-		return;
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line_no);
+		fclose(bus.file);
+		free(bus.content);
+		freemem(*stack);
+		exit(EXIT_FAILURE);
 	}
-	aux = (*stack)->next;
-	aux->prev = NULL;
-	while (tmp->next != NULL)
-	{
-		tmp = tmp->next;
-	}
-	tmp->next = *stack;
-	(*stack)->next = NULL;
-	(*stack)->prev = tmp;
-	(*stack) = aux;
+	h = *stack;
+	*stack = h->next;
+	free(h);
+
 }
 
 /**
-  *rotr- rotates the stack to the bottom
-  *@stack: stack head
-  *@line_no: line_number
-  *Return: no return
+ * swap - adds the top two elements of the stack.
+ * @stack: stack head
+ * @line_no: line_number
+ * Return: no return
  */
-void rotr(stack_t **stack, __attribute__((unused)) unsigned int line_no)
+void swap(stack_t **stack, unsigned int line_no)
 {
-	stack_t *copy;
+	stack_t *h = *stack;
+	int len = 0;
 
-	copy = *stack;
-	if (*stack == NULL || (*stack)->next == NULL)
+	while (h)
 	{
-		return;
+		h = h->next;
+		len++;
 	}
-	while (copy->next)
+	if (len < 2)
 	{
-		copy = copy->next;
+		fprintf(stderr, "L%d: can't swap, stack too short\n", line_no);
+		freemem(*stack);
+		exit(EXIT_FAILURE);
 	}
-	copy->next = *stack;
-	copy->prev->next = NULL;
-	copy->prev = NULL;
-	(*stack)->prev = copy;
-	(*stack) = copy;
+	if (*stack)
+	{
+		stack_t *tmp;
+
+		tmp = (*stack)->next;
+		(*stack)->next = tmp->next;
+		(tmp->next)->prev = *stack;
+		tmp->next = *stack;
+		(*stack)->prev = tmp;
+		tmp->prev = NULL;
+		*stack = tmp;
+	}
 }
