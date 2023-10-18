@@ -61,7 +61,7 @@ void swap(stack_t **stack, unsigned int line_no);
 void add(stack_t **stack, unsigned int line_no);
 void nop(stack_t **stack, unsigned int line_no);
 void addnode(stack_t **stack, int n);
-void memo(stack_t *stack);
+void freememo(stack_t *stack);
 void queue(stack_t **stack, unsigned int line_no);
 void addqueue(stack_t **stack, int n);
 void starck(stack_t **stack, unsigned int line_no);
