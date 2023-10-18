@@ -2,22 +2,21 @@
 
 int execute(char *content, stack_t **stack, unsigned int line_no, FILE *file)
 {
-    instruction_t opst[] = {
-        {"push", push}, {"pall", pall}, {"pint", pint},
-        {"pop", pop}, {"swap", swap}, {"add", add},
-        {"nop", nop}, {NULL, NULL}
+    instruction_t instructions[] = {
+        {"push", push_function}, {"pall", pall_function}, {"pint", pint_function},
+        {"pop", pop_function}, {"swap", swap_function}, {"add", add_function},
+        {"nop", nop_function}, {NULL, NULL}
     };
 
-   char *op = strtok(content, " \n\t");
+    char *op = strtok(content, " \n\t");
     if (op && op[0] == '#')
         return 0;
 
-    char *arg = strtok(NULL, " \n\t");
-    for (unsigned int i = 0; opst[i].opcode; i++)
+    for (unsigned int i = 0; instructions[i].opcode; i++)
     {
-        if (strcmp(op, opst[i].opcode) == 0)
+        if (strcmp(op, instructions[i].opcode) == 0)
         {
-            opst[i].f(stack, line_no);
+            instructions[i].function(stack, line_no);
             return 0;
         }
     }
@@ -25,6 +24,6 @@ int execute(char *content, stack_t **stack, unsigned int line_no, FILE *file)
     fprintf(stderr, "L%d: unknown instruction %s\n", line_no, op);
     fclose(file);
     free(content);
-    memo(*stack);
+    freemem(*stack);
     exit(EXIT_FAILURE);
 }
