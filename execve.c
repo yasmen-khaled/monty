@@ -15,11 +15,11 @@ int execute(char *content, stack_t **stack, unsigned int line_no, FILE *file)
         {"nop", nop}, {NULL, NULL}
     };
 
-    char *op = strtok(content, " \n\t");
+    char *op = _strtok(content, " \n\t");
     if (op && op[0] == '#')
         return 0;
 
-    char *arg = strtok(NULL, " \n\t");
+    char *arg = _strtok(NULL, " \n\t");
     for (unsigned int i = 0; opst[i].opcode; i++)
     {
         if (strcmp(op, opst[i].opcode) == 0)
@@ -32,6 +32,6 @@ int execute(char *content, stack_t **stack, unsigned int line_no, FILE *file)
     fprintf(stderr, "L%d: unknown instruction %s\n", line_no, op);
     fclose(file);
     free(content);
-    freemem(*stack);
+    freem(*stack);
     exit(EXIT_FAILURE);
 }
