@@ -1,4 +1,4 @@
-#include "main.h"
+#include "monty.h"
 
 /**
  * is_delimiter - split the string into tokens
