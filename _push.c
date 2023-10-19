@@ -7,7 +7,7 @@ void push(stack_t **stack, unsigned int line_no)
         fprintf(stderr, "L%d: usage: push integer\n", line_no);
         fclose(bus.file);
         free(bus.content);
-        freemem(*stack);
+        memo(*stack);
         exit(EXIT_FAILURE);
     }
 
@@ -18,11 +18,11 @@ void push(stack_t **stack, unsigned int line_no)
         fprintf(stderr, "L%d: usage: push integer\n", line_no);
         fclose(bus.file);
         free(bus.content);
-        freemem(*stack);
+        memo(*stack);
         exit(EXIT_FAILURE);
     }
 
   
-    addnode(stack, (int)n);
+    _addnode(stack, (int)n);
 }
 
