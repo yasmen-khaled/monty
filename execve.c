@@ -1,5 +1,6 @@
 #include "monty.h"
 
+#define _GUN_SOURCE
 
 int execute(char *content, stack_t **stack, unsigned int line_no, FILE *file)
 {
