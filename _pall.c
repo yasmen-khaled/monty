@@ -1,10 +1,6 @@
 #include "monty.h"
 
 /**
- *pall - print
- *@stack: pointer
- *@line_no:not using for nothing
- *
  */
 
 void pall(stack_t **stack, unsigned int line_no)
