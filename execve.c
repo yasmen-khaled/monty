@@ -16,15 +16,14 @@ int execute(char *content, stack_t **stack, unsigned int line_no, FILE *file)
 
     bus.arg = strtok(NULL, " \n\t");
 
-    unsigned int i = 0;
-    while (opst[i].opcode != NULL)
+    unsigned int i;
+    for (i = 0; opst[i].opcode != NULL; i++)
     {
         if (strcmp(op, opst[i].opcode) == 0)
         {
             opst[i].f(stack, line_no);
             return 0;
         }
-        i++;
     }
 
     fprintf(stderr, "L%d: unknown instruction %s\n", line_no, op);
