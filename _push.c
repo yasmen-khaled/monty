@@ -16,17 +16,17 @@ void push(stack_t **stack, unsigned int line_no)
 		{ fprintf(stderr, "L%d: usage: push integer\n", line_no);
 			fclose(bus.file);
 			free(bus.content);
-			freemem(*stack);
+			memo(*stack);
 			exit(EXIT_FAILURE); }}
 	else
 	{ fprintf(stderr, "L%d: usage: push integer\n", line_no);
 		fclose(bus.file);
 		free(bus.content);
-		freemem(*stack);
+		memo(*stack);
 		exit(EXIT_FAILURE); }
 	n = atoi(bus.arg);
 	if (bus.lifi == 0)
-		addnode(stack, n);
+		_addnode(stack, n);
 	else
-		addqueue(stack, n);
+		_addqueue(stack, n);
 }
