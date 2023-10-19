@@ -1,7 +1,7 @@
 #ifndef MONTY_H
 #define MONTY_H
 
-
+#define _GUN_SOURCE
 
 #include <stdio.h>
 #include <stdlib.h>
