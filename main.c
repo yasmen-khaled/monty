@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
         fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
         exit(EXIT_FAILURE);
     }
-    while (getline(content, sizeof(content), file) != NULL)
+    while (fgets(content, sizeof(content), file) != NULL)
     {
         bus.content = content;
         line_no++;
